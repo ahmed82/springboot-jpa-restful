@@ -35,7 +35,7 @@ public class WebController {
 		return "Hello Spring boot";
 	}
 
-	@GetMapping("/employee")
+	@GetMapping("/employees")
 	public List<Employee> GetAllEMp() {
 
 		return employeeRepository.findAll();
