@@ -9,7 +9,8 @@ import org.springframework.data.repository.query.Param;
 
 import com.atr.restfull.springbootjpa.model.Employee;
 
-public interface EmployeeRepository extends JpaRepository<Employee, Integer>, JpaSpecificationExecutor<Employee>{
+public interface EmployeeRepository extends JpaRepository<Employee, Integer>, JpaSpecificationExecutor<Employee>
+{
 	
 	@Query("SELECT e FROM Employee e WHERE e.firstName = ?1 AND e.lastName = ?2 ")
 	List<Employee> findByFirstNameOrLastName1(String firstName, String lastName);

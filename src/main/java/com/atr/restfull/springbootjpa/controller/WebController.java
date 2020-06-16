@@ -19,11 +19,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.atr.restfull.springbootjpa.exception.EmployeeNotFoundException;
 import com.atr.restfull.springbootjpa.model.Employee;
 import com.atr.restfull.springbootjpa.repository.EmployeeRepository;
-import com.atr.restfull.springbootjpa.service.employeeService;
+import com.atr.restfull.springbootjpa.service.EmployeeService;
 
 @RestController
 public class WebController {
 
+	@Autowired
+	EmployeeService employeeService;
+	
 	@Autowired
 	EmployeeRepository employeeRepository;
 
@@ -65,7 +68,7 @@ public class WebController {
 	}
 	
 	@GetMapping("/employee")
-	public List<Employee> GetAllEmployeeSpecefication(
+	public List<Employee> GetEmployeeSpecefication(
 			@RequestParam(required = false ) String id,
 			@RequestParam(required = false ) String firstName,
 			@RequestParam(required = false ) String lastName,
