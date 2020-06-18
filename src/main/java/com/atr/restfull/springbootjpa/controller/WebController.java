@@ -1,5 +1,6 @@
 package com.atr.restfull.springbootjpa.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -68,13 +69,45 @@ public class WebController {
 	}
 	
 	@GetMapping("/employee")
-	public List<Employee> GetEmployeeSpecefication(
+	public Respond GetEmployeeSpecefication(
 			@RequestParam(required = false ) String id,
 			@RequestParam(required = false ) String firstName,
 			@RequestParam(required = false ) String lastName,
 			Pageable pageable
 			) {
-		return employeeService.getSpecificationEmployee(id, firstName, lastName, pageable );
+		Respond respond = new Respond(employeeService.getSpecificationCount(id, firstName, lastName), employeeService.getSpecificationEmployee(id, firstName, lastName, pageable ));
+		return respond;
 	}
 
+}
+class Respond {
+	private long total;
+	
+	private List<Employee> employees;
+
+	public Respond(long total, List<Employee> employees) {
+		super();
+		this.total = total;
+		this.employees = employees;
+	}
+
+	public long getTotal() {
+		return total;
+	}
+
+	public void setTotal(long total) {
+		this.total = total;
+	}
+
+	public List<Employee> getEmployees() {
+		return employees;
+	}
+
+	public void setEmployees(List<Employee> employees) {
+		this.employees = employees;
+	}
+	
+	
+	
+	
 }
