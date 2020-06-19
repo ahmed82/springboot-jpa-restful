@@ -19,4 +19,5 @@ return entityManager.createQuery(cq).getSingleResult();
 ```
 
 ## Use Specification interface for `dynamic query`
+ repository.finaddl(new specification<model>)
 
