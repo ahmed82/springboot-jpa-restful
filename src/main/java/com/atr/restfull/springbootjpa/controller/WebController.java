@@ -63,14 +63,14 @@ public class WebController {
 	}
 	
 	@PatchMapping("/employee/{id}")
-	public void updateEmployee(@RequestBody Employee em, @PathVariable int id) {
-		em.setId(id);
-		employeeRepository.save(em);
+	public void updateEmployee(@RequestBody Employee employee, @PathVariable(value = "id") int id) {
+		employee.setId(id);
+		employeeRepository.save(employee);
 	}
 	
 	@GetMapping("/employee")
 	public Respond GetEmployeeSpecefication(
-			@RequestParam(required = false ) String id,
+			@RequestParam(name="id",required = false ) String id,
 			@RequestParam(required = false ) String firstName,
 			@RequestParam(required = false ) String lastName,
 			Pageable pageable
