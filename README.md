@@ -21,3 +21,8 @@ return entityManager.createQuery(cq).getSingleResult();
 ## Use Specification interface for `dynamic query`
  repository.finaddl(new specification<model>)
 
+# Test
+```java
+curl http://localhost:8080/employee?firstName=a
+curl http://localhost:8080/employee?lastName=a&id=1
+```
