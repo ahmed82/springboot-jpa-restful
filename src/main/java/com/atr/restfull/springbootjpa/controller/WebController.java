@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.atr.restfull.springbootjpa.exception.EmployeeNotFoundException;
 import com.atr.restfull.springbootjpa.model.Employee;
@@ -31,15 +32,19 @@ public class WebController {
 	@Autowired
 	EmployeeRepository employeeRepository;
 
-	@GetMapping("/hello")
-	public String greeting() {
-		return "Hello Spring boot";
-	}
 
 	@GetMapping("/employees")
 	public List<Employee> GetAllEMp() {
-
+		
 		return employeeRepository.findAll();
+	}
+	
+	
+	@GetMapping("/e")
+	public RedirectView  redirectView () {
+		Optional<Employee> employee = employeeRepository.findById(1);
+		 		String redirectedUrl =employee.get().getFirstName().trim().toString();
+		return new RedirectView("https://www.google.com/?code="+redirectedUrl);
 	}
 	
 	@GetMapping("/employee/{id}")
@@ -75,7 +80,9 @@ public class WebController {
 			@RequestParam(required = false ) String lastName,
 			Pageable pageable
 			) {
-		Respond respond = new Respond(employeeService.getSpecificationCount(id, firstName, lastName), employeeService.getSpecificationEmployee(id, firstName, lastName, pageable ));
+		Respond respond = new Respond(
+				employeeService.getSpecificationCount(id, firstName, lastName), 
+				employeeService.getSpecificationEmployee(id, firstName, lastName, pageable ));
 		return respond;
 	}
 
