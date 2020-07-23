@@ -1,0 +1,11 @@
+FROM openjdk:8-jdk-alpine
+# RUN addgroup -S spring && adduser -S spring -G spring
+# USER spring:spring
+EXPOSE 8080
+MAINTAINER Ahmed AlSalih
+RUN mkdir -p /opt/app/
+WORKDIR /opt/app/
+ARG JAR_FILE=target/spring-jpa.jar
+# cp target/spring-jpa.jar /opt/app/spring-jpa.jar
+COPY ${JAR_FILE} /opt/app/spring-jpa.jar
+ENTRYPOINT ["java","-jar","/opt/app/spring-jpa.jar"]

@@ -1,11 +1,12 @@
 package com.atr.restfull.springbootjpa.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -25,13 +26,20 @@ import com.atr.restfull.springbootjpa.service.EmployeeService;
 
 @RestController
 public class WebController {
+	
+	private final Logger logger = LoggerFactory.getLogger(WebController.class);
 
 	@Autowired
 	EmployeeService employeeService;
 	
 	@Autowired
 	EmployeeRepository employeeRepository;
-
+	
+	@GetMapping("/")
+	public String WELCOME() {
+		logger.info("Create log for testing");
+		return "Greeting friends";
+	}
 
 	@GetMapping("/employees")
 	public List<Employee> GetAllEMp() {

@@ -53,34 +53,7 @@ public class EmployeeService {
 		         return cb.like(cb.lower(root.get("firstName")), "%" + firstName.toLowerCase() + "%");
 		     };
 		  }
-	/**
-	 * public List<Employee> getSpecificationEmployee(String id, String firstName, String lastName, Pageable pageable) {
 
-		List<Employee> employees = employeeRepository.findAll(new Specification<Employee>() {
-
-			@Override
-			public Predicate toPredicate(Root<Employee> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
-
-				Predicate predicate = criteriaBuilder.conjunction();
-				if (Objects.nonNull(id)) {
-					predicate = criteriaBuilder.and(predicate, criteriaBuilder.equal(root.get("id"), id));
-				}
-				if (StringUtils.isEmpty(firstName)) {
-					predicate = criteriaBuilder.and(predicate, criteriaBuilder.like(root.get("firstName"), firstName));
-				}
-				if (StringUtils.isEmpty(lastName)) {
-					predicate = criteriaBuilder.and(predicate,
-							criteriaBuilder.like(root.get("lastName"), "%" + lastName + "%"));
-				}
-				query.orderBy(criteriaBuilder.desc(root.get("firstName")), criteriaBuilder.asc(root.get("id")));
-
-				return predicate;
-			}
-		}, pageable).getContent();
-		return employees;
-
-	}
-	 */
 	
 	 public Long getSpecificationCount(String id, String firstName, String lastName) {
 		 
