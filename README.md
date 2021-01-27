@@ -26,3 +26,7 @@ return entityManager.createQuery(cq).getSingleResult();
 curl http://localhost:8080/employee?firstName=a
 curl http://localhost:8080/employee?lastName=a&id=1
 ```
+## for passing value from the mvn command line to the pom file
+```
+mvn clean install -DvueBuild=dev
+```
