@@ -9,9 +9,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.beans.factory.annotation.Value;
+
+
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
 
 import org.springframework.data.domain.Pageable;
 
@@ -41,9 +45,13 @@ public class WebController {
 	@Autowired
 	EmployeeRepository employeeRepository;
 	
+	@Value("${key.AUSA-Approver}")
+	public  String fromProperty;
+	
 	@GetMapping("/")
 	public String WELCOME() {
 		logger.info("Create log for testing");
+		logger.info("Create log for fromProperty: "+fromProperty);
 		return "Greeting friends";
 	}
 
