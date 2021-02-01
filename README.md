@@ -30,3 +30,19 @@ curl http://localhost:8080/employee?lastName=a&id=1
 ```
 mvn clean install -DvueBuild=dev
 ```
+
+
+# Report
+## Get  Agency Report
+`Send list of Agencies Ids to the bellow URL:
+```
+http://localhost:8080/api/agencies/report
+```
+Type of methofe is Get,  with Array of values which is list of integer numbers of Agencies Id's:
+```
+http://localhost:8080/api/agencies/report?values=5,11
+```
+Or
+```
+http://localhost:8080/api/agencies/report?values=5&values=11
+```
