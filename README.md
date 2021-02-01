@@ -46,3 +46,12 @@ Or
 ```
 http://localhost:8080/api/agencies/report?values=5&values=11
 ```
+
+# in the Repository we can use:
+```
+List<AgenciesReport> findByAgencyIdIn(List<Integer> agencyIdList);
+```
+or 
+```
+
+```
