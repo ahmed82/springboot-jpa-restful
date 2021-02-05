@@ -40,3 +40,5 @@ curl http://localhost:8080/employee?firstName=a&page=0&size=5
 curl http://localhost:8080/employee?lastName=a&id=1&page=1&size=5
 ```
 
+## Specification combain multi Specification
+
