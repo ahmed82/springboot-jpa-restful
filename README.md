@@ -41,4 +41,80 @@ curl http://localhost:8080/employee?lastName=a&id=1&page=1&size=5
 ```
 
 ## Specification combain multi Specification
+```java
+	/*
+	 * return recordViewRepository.findAll( Where() .or() .or );
+	 */
+		public List<RecordView> generateRecordsReport(
+				Date applicationSubmittedStartDate, 
+				Date applicationSubmittedEndDate,
+				Date sentStartDate, 
+				Date sentEndDate, 
+				Date receivedStartDate,
+				Date receivedEndDate,
+				Date expirationDateStart,
+				Date expirationDateEnd,
+				Date invoiceStartDate,
+				Date invoiceEndDate, 
+				Date checkRequestedStartDate,
+				Date checkRequestedEndDate, 
+				String action,
+				String department,
+				List<String> paymentMethods,
+				List<RecordView> locations,
+				List<RecordView> agencies,
+				List<String> recordTypes,
+				Pageable pageable) {
+			return recordViewRepository
+					.findAll(Specification.where(
+							hasLocationNoOrLocationFilter(locations))
+					.and(hasAgencyNumberOrAgencyId(agencies))
+					//.and(isPremium())
+					);
+		}//Master Specification 
+		
+		public static Specification<RecordView> hasLocationNoOrLocationFilter(List<RecordView> locations) {
+	        return (root, query, cb) -> {
+	            List<Predicate> predicates = new ArrayList<>();
+	            Predicate predWithLocationID = null, locationPredicate = null;
+	            for (RecordView location : locations) { 
+					if (Objects.nonNull(location.getLocationNumber())) {
+						 predWithLocationID =  cb.equal(root.get(location.getLocationNumber()), "locationNumber");
+					} else {
 
+	                locationPredicate = 
+	            		   cb.and(
+	            				    cb.equal(cb.lower(root.<String>get("city")), location.getCity()),
+									cb.equal(cb.lower(root.<String>get("state")), location.getState()),
+									cb.equal(root.<String>get("county"), location.getCounty()));
+									//cb.lessThanOrEqualTo(root.<Date>get("scheduleDate"), formattedToDate));
+					}
+					if (null != predWithLocationID)
+	                    predicates.add(predWithLocationID);
+	                else
+	                    predicates.add(locationPredicate);
+
+	            }//for loop
+				Predicate finalQuery = cb.or(predicates.toArray(new Predicate[0]));
+	            return finalQuery;
+	        };
+	    }
+	
+	
+	public static Specification<RecordView> hasAgencyNumberOrAgencyId(List<RecordView> agencies) {
+        return (root, query, cb) -> {
+            List<Predicate> predicates = new ArrayList<>();
+            for (RecordView agency : agencies) {
+            	Predicate pred = null;
+				if (Objects.nonNull(agency.getAgencyNumber())) {
+					 pred =  cb.equal(root.get(agency.getAgencyNumber()), "agencyNumber");
+				} 
+                if (null != pred) {
+                    predicates.add(pred);
+                }
+            }//for loop
+			Predicate finalQuery = cb.or(predicates.toArray(new Predicate[0]));
+            return finalQuery;
+        };
+    }//hasAgencyNumberOrAgencyId
+```
