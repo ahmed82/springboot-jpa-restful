@@ -33,12 +33,38 @@ mvn clean install -DvueBuild=dev
 ```
 
 
-## pagenation:
-use &page=0 &size=10
+# pagenation:
+## use &page=0 &size=10
 ```java
 curl http://localhost:8080/employee?firstName=a&page=0&size=5
 curl http://localhost:8080/employee?lastName=a&id=1&page=1&size=5
 ```
+
+
+
+
+# Report
+## Get  Agency Report
+`Send list of Agencies Ids to the bellow URL:
+```
+http://localhost:8080/api/agencies/report
+```
+Type of methofe is Get,  with Array of values which is list of integer numbers of Agencies Id's:
+```
+http://localhost:8080/api/agencies/report?values=5,11
+```
+Or
+```
+http://localhost:8080/api/agencies/report?values=5&values=11
+```
+
+# in the Repository.calss we can use:
+```java
+List<AgenciesReport> findByAgencyIdIn(List<Integer> agencyIdList);
+```
+or 
+```
+
 
 ## Specification combain multi Specification
 ```java
@@ -117,4 +143,5 @@ curl http://localhost:8080/employee?lastName=a&id=1&page=1&size=5
             return finalQuery;
         };
     }//hasAgencyNumberOrAgencyId
+
 ```
