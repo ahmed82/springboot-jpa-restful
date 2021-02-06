@@ -12,11 +12,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import com.rbs.licensemanagement.model.RecordView;
-import com.rbs.licensemanagement.model.ReportAgenciesDTO;
-import com.rbs.licensemanagement.model.ReportDTO;
-import com.rbs.licensemanagement.model.ReportLocationDTO;
-import com.rbs.licensemanagement.repository.RecordViewRepository;
+import com.atr.project.model.RecordView;
+import com.atr.project.model.ReportAgenciesDTO;
+import com.atr.project.model.ReportDTO;
+import com.atr.project.model.ReportLocationDTO;
+import com.atr.project.repository.RecordViewRepository;
 
 @Service
 public class RecordReportService {
