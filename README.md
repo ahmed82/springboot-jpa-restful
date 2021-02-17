@@ -63,8 +63,6 @@ http://localhost:8080/api/agencies/report?values=5&values=11
 List<AgenciesReport> findByAgencyIdIn(List<Integer> agencyIdList);
 ```
 or 
-```
-
 
 ## Specification combain multi Specification
 ```java
