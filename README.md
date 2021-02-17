@@ -145,3 +145,27 @@ or
     }//hasAgencyNumberOrAgencyId
 
 ```
+
+
+## For DTO Master Specification
+```java
+	public Page<RecordViewReportDTO> getRecordsReportSpecification(ReportDTO reportReq, Pageable pageable) {
+		Page<RecordViewReportDTO> records =  recordViewReportRepository.findAll(Specification.where(
+				getIndivitualFilterSpecification(reportReq))
+				.and(hasLocationNoOrLocationFilter(reportReq.getLocations()))
+				.and(hasRecordTypedSpecification(reportReq.getRecordTypes()))
+				.and(paymentMethodsSpecification(reportReq.getPaymentMethods()))
+				.and(hasAgencyNumberOrAgencyId(reportReq.getAgencies())),pageable);
+		 return records;
+	}
+	
+	public long getRecordsReportSpecificationCount(ReportDTO reportReq) {
+		long records =  recordViewReportRepository.count(Specification.where(
+				getIndivitualFilterSpecification(reportReq))
+				.and(hasLocationNoOrLocationFilter(reportReq.getLocations()))
+				.and(hasRecordTypedSpecification(reportReq.getRecordTypes()))
+				.and(paymentMethodsSpecification(reportReq.getPaymentMethods()))
+				.and(hasAgencyNumberOrAgencyId(reportReq.getAgencies())));
+		 return records;
+	}
+```
