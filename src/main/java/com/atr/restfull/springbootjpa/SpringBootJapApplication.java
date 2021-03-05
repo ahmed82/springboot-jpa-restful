@@ -16,7 +16,7 @@ public class SpringBootJapApplication {
 		SpringApplication.run(SpringBootJapApplication.class, args);
 	}
 	
-// ADD Gloable CORS
+// ADD global CORS configuration
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
