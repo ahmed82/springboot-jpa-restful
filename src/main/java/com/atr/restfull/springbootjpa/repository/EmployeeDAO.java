@@ -14,13 +14,11 @@ import com.atr.restfull.springbootjpa.model.Employee;
 @Repository
 @Transactional
 public interface EmployeeDAO extends JpaRepository<Employee, Integer> {
-	List<Employee> findByEmployeeNameNotIn(List<String> names); // Spring JPA In cause using method name
+	List<Employee> findByFirstNameNotIn(List<String> firstName); // Spring JPA In cause using method name
 
-	@Query("SELECT e FROM Employee e WHERE e.employeeName NOT IN (:names)") // Spring JPA In cause using @Query
-	List<Employee> findByEmployeeNamesNot(@Param("names") List<String> names);
+	@Query("SELECT e FROM Employee e WHERE e.firstName NOT IN (:firstName)") // Spring JPA In cause using @Query
+	List<Employee> findByEmployeeNamesNot(@Param("firstName") List<String> names);
 
-	@Query(nativeQuery = true, value = "SELECT * FROM Employee as e WHERE e.employeeName NOT IN (:names)") // Spring JPA
-																											// In cause
-																											// query
-	List<Employee> findByEmployeeNameNot(@Param("names") List<String> names);
+	@Query(nativeQuery = true, value = "SELECT * FROM Employee as e WHERE e.firstName NOT IN (:firstName)") // Spring  JPA In cause query
+	List<Employee> findByEmployeeNameNot(@Param("firstName") List<String> names);
 }
